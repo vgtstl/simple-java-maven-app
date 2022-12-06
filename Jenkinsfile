@@ -21,7 +21,7 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'targ/*.jar', followSymlinks: false
+            archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
         }
     }
 }
