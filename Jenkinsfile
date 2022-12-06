@@ -4,6 +4,8 @@ pipeline {
     tools {
         maven "mvn3.8.6"
     }
+    
+    triggrs { pollSCM('*/1 * * * *') }
 
     stages {
         stage('Version') {
