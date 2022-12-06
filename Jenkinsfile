@@ -17,4 +17,9 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            archiveArtifacts artifacts: 'targ/*.jar', followSymlinks: false
+        }
+    }
 }
