@@ -22,6 +22,9 @@ pipeline {
                 sh "mvn clean package"
             }
         }
+        stage('DockerBuild'){
+            docker  build -t helloworld .
+        }
     }
     post {
         always {
