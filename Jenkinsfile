@@ -9,6 +9,9 @@ pipeline {
     //triggers { pollSCM('*/1 * * * *') }
 
     stages {
+        stage('Checkout'){
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub_token', url: 'https://github.com/vgtstl/simple-java-maven-app.git']]])
+        }
         stage('Version') {
             steps {
                 sh "mvn --version"
