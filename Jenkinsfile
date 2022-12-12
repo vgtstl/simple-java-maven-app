@@ -1,10 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.5.4-jdk-7-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent any
+    
     
     //triggers { pollSCM('*/1 * * * *') }
 
@@ -13,11 +9,23 @@ pipeline {
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub_token', url: 'https://github.com/vgtstl/simple-java-maven-app.git']]])
         }
         stage('Version') {
+            agent {
+                docker {
+                    image 'maven:3.5.4-jdk-7-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
             steps {
                 sh "mvn --version"
             }
         }
         stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.5.4-jdk-7-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
             steps {
                 sh "mvn clean package"
             }
