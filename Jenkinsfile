@@ -5,6 +5,11 @@ pipeline {
         maven 'mvn3.8.6'
     }
 
+    options {
+        timeout(time: 10, unit: 'MINUTES')
+        timestamps()
+    }
+
     triggers { pollSCM('*/1 * * * *') }
 
     stages {
