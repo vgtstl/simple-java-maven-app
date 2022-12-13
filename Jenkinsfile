@@ -13,7 +13,7 @@ pipeline {
         stage('Version') {
             agent {
                 docker {
-                    image 'maven:3.5.4-jdk-7-alpine'
+                    image 'maven:3.5-jdk-8'
                     args '-v /root/.m2:/root/.m2'
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'maven:3.5.4-jdk-7-alpine'
+                    image 'maven:3.5-jdk-8'
                     args '-v /root/.m2:/root/.m2'
                 }
             }
