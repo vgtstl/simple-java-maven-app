@@ -31,7 +31,9 @@ pipeline {
             }
         }
         stage('DockerBuild'){
-            docker  build -t helloworld .
+             steps {
+                sh "docker  build -t helloworld ."
+            } 
         }
     }
     post {
