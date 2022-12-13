@@ -14,7 +14,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.5-jdk-8'
-                    args '-v /root/.m2:/root/.m2'
+                    // args '-v /root/.m2:/root/.m2'
                 }
             }
             steps {
@@ -25,7 +25,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.5-jdk-8'
-                    args '-v /root/.m2:/root/.m2'
+                    // args '-v /root/.m2:/root/.m2'
                 }
             }
             steps {
@@ -34,7 +34,33 @@ pipeline {
         }
         stage('DockerBuild'){
              steps {
-                sh "docker  build -t helloworld ."
+                sh "docker  build -t venu/helloworld ."
+            } 
+        }
+        stage('DockerScan'){
+             steps {
+                echo "docker scan venu/helloworld"
+            } 
+        }
+        stage('DockePush'){
+             steps {
+                echo "docker  push venu/helloworld"
+            } 
+        }
+        stage('Deploy to Dev'){
+             steps {
+                echo "Dev Deployment Completed"
+            } 
+        }
+        stage('Deploy to QA'){
+             steps {
+                echo "QA Deployment Completed"
+            } 
+        }
+        stage('Deploy to Prod'){
+             steps {
+                
+                echo "QA Deployment Completed"
             } 
         }
     }

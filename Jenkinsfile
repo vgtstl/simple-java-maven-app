@@ -4,7 +4,7 @@ pipeline {
     tools {
         maven 'mvn3.8.6'
     }
-    
+
     triggers { pollSCM('*/1 * * * *') }
 
     stages {
@@ -23,9 +23,30 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-        stage('DockerBuild'){
+        stage('DockerScan'){
+            steps {
+                echo "docker scan venu/helloworld"
+            } 
+        }
+        stage('DockePush'){
              steps {
-                sh "docker  build -t helloworld ."
+                echo "docker  push venu/helloworld"
+             } 
+        }
+        stage('Deploy to Dev'){
+             steps {
+                echo "Dev Deployment Completed"
+             } 
+        }
+        stage('Deploy to QA'){
+             steps {
+                echo "QA Deployment Completed"
+             } 
+        }
+        stage('Deploy to Prod'){
+            steps {
+                input('Do you wants to proceed with prod deployment')
+                echo 'Prod Deployment Completed'
             } 
         }
     }
