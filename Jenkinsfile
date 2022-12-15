@@ -34,6 +34,11 @@ pipeline {
                 }
             }
         }
+        stage('DockerBuild'){
+            steps {
+                echo 'docker build -t venu/helloworld .'
+            }
+        }
         stage('DockerScan'){
             steps {
                 echo 'docker scan venu/helloworld'
