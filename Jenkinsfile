@@ -44,30 +44,34 @@ pipeline {
                 echo 'docker scan venu/helloworld'
             }
         }
-        stage('before-DockerPush-stage') {
+        stage('DockePush'){
             when {
-                stage 'DockerPush'
+                branch 'master'
             }
             steps {
-                echo 'run this stage - ony if the stage = DockerScan'
+                echo 'docker  push venu/helloworld'
             }
         }
-        stage('DockePush'){
-             steps {
-                echo 'docker  push venu/helloworld'
-             }
-        }
         stage('Deploy to Dev'){
-             steps {
+            when {
+                branch 'master'
+            }
+            steps {
                 echo 'Dev Deployment Completed'
-             }
+            }
         }
         stage('Deploy to QA'){
-             steps {
+            when {
+                branch 'master'
+            }
+            steps {
                 echo 'QA Deployment Completed'
-             }
+            }
         }
         stage('Deploy to Prod'){
+            when {
+                branch 'master'
+            }
             steps {
                 input('Do you wants to proceed with prod deployment')
                 echo 'Prod Deployment Completed'
@@ -75,10 +79,6 @@ pipeline {
         }
     }
     post {
-        // always {
-        //     junit 'target/surefire-reports/*.xml'
-        //     archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
-        // }
         success {
             echo 'Build Success'
             cleanWs()
