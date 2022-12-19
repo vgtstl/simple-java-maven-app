@@ -46,9 +46,7 @@ pipeline {
         }
         stage('DockerPush'){
             when {
-                allof {
-                    stage 'DockerScan'
-                }
+                stage
             }
         }
         stage('DockePush'){
