@@ -44,6 +44,13 @@ pipeline {
                 echo 'docker scan venu/helloworld'
             }
         }
+        stage('DockerPush'){
+            when {
+                allof {
+                    stage 'DockerScan'
+                }
+            }
+        }
         stage('DockePush'){
              steps {
                 echo 'docker  push venu/helloworld'
