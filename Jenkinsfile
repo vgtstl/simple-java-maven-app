@@ -44,9 +44,12 @@ pipeline {
                 echo 'docker scan venu/helloworld'
             }
         }
-        stage('DockerPush'){
+        stage('before-DockerPush-stage') {
             when {
-                stage
+                stage 'DockerPush'
+            }
+            steps {
+                echo 'run this stage - ony if the stage = DockerScan'
             }
         }
         stage('DockePush'){
